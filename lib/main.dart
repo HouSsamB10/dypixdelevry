@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'controllers/navigationController.dart';
+import 'screens/settingsScreen.dart';
 import 'widgets/cartSilder.dart';
 import 'widgets/search.dart';
 
@@ -13,7 +14,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -41,42 +41,59 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Scaffold(
         body: Obx((() =>
             controller.navigationScreens[controller.selectedIndex.value])),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: const Color(0xff53B175),
-          unselectedItemColor: Colors.black,
-          elevation: 5,
-          onTap: (value) {
-            setState(() {
-              controller.selectedIndex.value = value;
-            });
-          },
-          currentIndex: controller.selectedIndex.value,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-              ),
-              label: '',
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 5),
+            ],
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.explore,
-              ),
-              label: '',
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30.0),
+              topRight: Radius.circular(30.0),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.search,
-              ),
-              label: '',
+            child: BottomNavigationBar(
+              selectedItemColor: const Color(0xff53B175),
+              unselectedItemColor: Colors.black,
+              elevation: 5,
+              onTap: (value) {
+                setState(() {
+                  controller.selectedIndex.value = value;
+                });
+              },
+              currentIndex: controller.selectedIndex.value,
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.home,
+                  ),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.explore,
+                  ),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.search,
+                  ),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.favorite_border,
+                  ),
+                  label: '',
+                ),
+              ],
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.favorite_border,
-              ),
-              label: '',
-            ),
-          ],
+          ),
         ),
       ),
     );
